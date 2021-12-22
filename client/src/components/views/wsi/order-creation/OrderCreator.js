@@ -66,12 +66,12 @@ function OrderCreator() {
   function Address() {
     return (
       <div className='vertical-form'>
-        <label>Name: <input /></label>
-        <label>Address: <input /></label>
-        <label>City: <input /></label>
-        <label>State: <input /></label>
-        <label>Country: <input defaultValue={'US'} /></label>
-        <label>Zip Code: <input /></label>
+        <label>Name: <input required /></label>
+        <label>Address: <input required /></label>
+        <label>City: <input required /></label>
+        <label>State: <input required /></label>
+        <label>Country: <input defaultValue={'US'} required /></label>
+        <label>Zip Code: <input required /></label>
       </div>
     );
   }
@@ -116,21 +116,24 @@ function OrderCreator() {
 
   return (
     <div className='tab-content'>
-      <div className='order-creator'>
-        <div>
-          <h1>Order Creation</h1>
-          <OrderInfo />
-          <h2>Customer Address</h2>
-          <Address />
-          <h2>Recipient Address</h2>
-          <Address />
+      <form>
+        <div className='order-creator'>
+          <div>
+            <h1>Order Creation</h1>
+            <OrderInfo />
+            <h2>Customer Address</h2>
+            <Address />
+            <h2>Recipient Address</h2>
+            <Address />
+          </div>
+          <div className='product-container'>
+            <h2>Products</h2>
+            {products.map(product => <Product id={product.id}/>)}
+            <button type='button' onClick={AddProduct}>Add another product</button>
+          </div>
         </div>
-        <div className='product-container'>
-          <h2>Products</h2>
-          {products.map(product => <Product id={product.id}/>)}
-          <button type='button' onClick={AddProduct}>Add another product</button>
-        </div>
-      </div>
+        <button type='submit'>Submit Order</button>
+      </form>
     </div>
   );
 }
