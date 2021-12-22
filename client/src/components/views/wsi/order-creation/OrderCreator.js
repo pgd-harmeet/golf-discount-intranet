@@ -2,7 +2,7 @@ import './OrderCreator.css';
 import { useState } from 'react';
 
 function OrderCreator() {
-  const [products, setProducts] = useState([<Product key={0}/>]);
+  const [products, setProducts] = useState([{id: 1}]);
 
   function OrderInfo() {
     return (
@@ -10,7 +10,7 @@ function OrderCreator() {
         <label>
           Store Number:
           <label>
-            <input type='radio' name='store_num' value='1'/>
+            <input type='radio' name='store_num' value='1' defaultChecked />
             1
           </label>
           <label>
@@ -64,7 +64,17 @@ function OrderCreator() {
     );
   }
 
-  function Product() {
+  function Product(props) {
+    const id = props.id;
+  
+    /**
+     * Removes a product from the product list based on the id
+     */
+    function RemoveProduct() {
+      let newProducts = products.filter(product => product.id !== id);
+      setProducts(newProducts);
+    }
+
     return(
       <div className='vertical-form'>
         <label className='text-input'>SKU: <input required /></label>
@@ -83,13 +93,8 @@ function OrderCreator() {
     let productCopy = products.map(product => {
       return product;
     });
-    productCopy.push(<Product key={productCopy.length + 1}/>);
+    productCopy.push({id: products[products.length - 1].id + 1});
     setProducts(productCopy);
-  }
-
-  function RemoveProduct(productToRemove) {
-    let newProducts = products.filter(product => product !== productToRemove);
-    setProducts(newProducts);
   }
 
   return (
@@ -105,7 +110,7 @@ function OrderCreator() {
         </div>
         <div className='product-container'>
           <h2>Products</h2>
-          {products}
+          {products.map(product => <Product id={product.id}/>)}
           <button type='button' onClick={AddProduct}>Add another product</button>
         </div>
       </div>
