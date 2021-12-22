@@ -1,9 +1,17 @@
 import './OrderCreator.css';
 import { useState } from 'react';
 
+/**
+ * Component that handles creating a WSI order
+ * @returns JSX React component
+ */
 function OrderCreator() {
   const [products, setProducts] = useState([{id: 1}]);
 
+  /**
+   * Component containing order information such as order number, shipping method etc.
+   * @returns JSX React component
+   */
   function OrderInfo() {
     return (
       <div className='vertical-form'>
@@ -51,6 +59,10 @@ function OrderCreator() {
     );
   }
 
+  /**
+   * Address component with a default of US for the country
+   * @returns JSX React component
+   */
   function Address() {
     return (
       <div className='vertical-form'>
@@ -64,6 +76,11 @@ function OrderCreator() {
     );
   }
 
+  /**
+   * Product component with a default of 1 for quantity
+   * @param {Object} props Object with id assigned to this product entry
+   * @returns JSX React component 
+   */
   function Product(props) {
     const id = props.id;
   
